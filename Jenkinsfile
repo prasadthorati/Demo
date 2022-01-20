@@ -4,7 +4,7 @@ node {
     }
     stage ('build'){
         withGradle{
-            sh 'chmod 777 gradlew'
+            sh 'chmod 700 gradlew'
             sh './gradlew build'
         }
     }

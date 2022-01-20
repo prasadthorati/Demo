@@ -4,7 +4,7 @@ timestamps {
 
 node () {
 
-	stage ('demo1 - Checkout') {
+	stage ('demo - Checkout') {
  	 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/prasadthorati/demo.git']]]) 
 	}
 	stage ('fan - Build') {

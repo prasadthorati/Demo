@@ -1,6 +1,0 @@
----
-# tasks file for project
-
-- name: run java application
-  shell: /var/lib/jenkins/workspace/demo/build/lib demo.jar nohup demo.jar &
-    

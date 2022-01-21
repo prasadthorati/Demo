@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['master', 'dev', 'qa'], description: 'Select Branch to Build', name: 'branch')])])
+properties([parameters([choice(choices: ['master'], description: 'Select Branch to Build', name: 'branch')])])
 
 node {
     stage ('git'){

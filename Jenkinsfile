@@ -11,4 +11,7 @@ node {
             sh './gradlew build'
         }
     }
+    stage ('deployment'){
+        ansiblePlaybook credentialsId: 'ansible', installation: 'ansible', inventory: 'hosts', playbook: 'ansibleroles.yml'
+    }
 }

@@ -1,6 +1,6 @@
 ---
 # tasks file for project
 - name: run java application
-  shell: /var/lib/jenkins/workspace/parademo/build/libs/ java -jar demo.jar
+  shell: /var/lib/jenkins/workspace/parademo/build/libs/ java -jar demo.jar >/dev/null 2>&1 &
 
     

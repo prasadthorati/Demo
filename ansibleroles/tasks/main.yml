@@ -4,7 +4,7 @@
   copy: 
     src: /var/lib/jenkins/workspace/demo/build/libs/
     dest: /opt
-- name: copy java application
+- name: run java application
   shell: /opt java -jar demo.jar >/dev/null 2>&1 &
 
     

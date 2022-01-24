@@ -14,7 +14,5 @@ node {
     stage ('deployment'){
         ansiblePlaybook credentialsId: 'ansible', installation: 'ansible', inventory: 'hosts', playbook: 'ansibleroles.yml'
     }
-     stage ('hii'){
-        sh '/var/lib/jenkins/workspace/demo/build/libs java -jar demo.jar >/dev/null 2>&1 &'
-    }
+     
 }

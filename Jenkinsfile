@@ -1,17 +1,17 @@
 properties([parameters([choice(choices: ['master'], description: 'Select Branch to Build', name: 'branch')])])
 
 node {
-    stage ('git'){
+    stage ('checking out'){
         
         git credentialsId: 'git', url: 'https://github.com/prasadthorati/demo.git', branch: "${params.branch}"
     }
-    stage ('build'){
+    stage ('build using gradle'){
         withGradle{
             sh 'chmod 700 gradlew'
             sh './gradlew clean build'
         }
     }
-    stage ('deployment'){
+    stage ('deploy on localhost'){
         ansiblePlaybook credentialsId: 'ansible', installation: 'ansible', inventory: 'hosts', playbook: 'ansibleroles.yml'
     }
      

@@ -1,6 +1,9 @@
 ---
 # tasks file for project
-- name: run java application
-  shell: /var/lib/jenkins/workspace/demo/build/libs java -jar demo.jar >/dev/null 2>&1 &
-
-    
+- name: copy jar file
+  ansible.builtin.copy:
+    src: /var/lib/jenkins/workspace/demo/build/libs/demo.jar
+    dest: /opt/demo.jar
+- name: starting spring service
+  shell: systemctl start spring.service
+  

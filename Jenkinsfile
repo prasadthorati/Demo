@@ -5,7 +5,7 @@ node {
         
         git credentialsId: 'git', url: 'https://github.com/prasadthorati/demo.git', branch: "${params.branch}"
     }
-    stage ('build using gradle'){
+    stage ('build with gradle'){
         withGradle{
             sh 'chmod 700 gradlew'
             sh './gradlew clean build'

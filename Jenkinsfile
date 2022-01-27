@@ -9,16 +9,19 @@ pipeline {
         stage('checking out'){
             steps{
                  git credentialsId: 'git', url: 'https://github.com/prasadthorati/demo.git', branch: "${params.branch}"
+                //echo "git clone"
             }
         }
         stage('build with gradle'){
             steps{
                 sh 'gradle clean build'
+                //echo "building"
             }
         }
         stage('deploy on localhost'){
             steps{
                 ansiblePlaybook credentialsId: 'ansible', installation: 'ansible', inventory: 'hosts', playbook: 'ansibleroles.yml'
+                //echo "deploying"
             }
         }
    

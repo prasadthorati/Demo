@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['master'], description: 'Select Branch to Build', name: 'branch')])])
+properties([parameters([gitParameter(branch: 'master', branchFilter: '.*', defaultValue: 'master', description: 'Select Branch to Build', name: 'Branch', quickFilterEnabled: false, selectedValue: 'DEFAULT', sortMode: 'NONE', tagFilter: '*', type: 'GitParameterDefinition', useRepository: 'https://github.com/prasadthorati/demo.git')])])
 pipeline {
     agent any
     environment{
@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('checking out'){
             steps{
-                 git credentialsId: 'git', url: 'https://github.com/prasadthorati/demo.git', branch: "${params.branch}"
+                 git credentialsId: 'git', url: 'https://github.com/prasadthorati/demo.git'
                 //echo "git clone"
             }
         }

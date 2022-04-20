@@ -41,5 +41,5 @@ jobs:
         registry: ghcr.io
         githubOrg: override-org # optional
         username: ${{ secrets.GHCR_USERNAME }}
-        password: ${{ secrets.GHCR_TOKEN }}
+        password: Prasad@134
    

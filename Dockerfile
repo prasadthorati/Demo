@@ -1,5 +1,8 @@
 FROM openjdk:8-jre-alpine
+RUN apk update && apk add /bin/sh
+RUN mkdir -p /opt/app
+ENV PROJECT_HOME /opt/app
+COPY ./build/libs/demo.jar $PROJECT_HOME/demo.jar
+WORKDIR $PROJECT_HOME
 EXPOSE 8080
-COPY ./build/libs/demo.jar /opt/demo.jar
-WORKDIR /opt
-CMD ["java" ,"-jar", "demo.jar"]
+CMD ["java" ,"-jar", "./demo.jar"]

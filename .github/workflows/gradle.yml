@@ -32,9 +32,11 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: push to ghcr
+    - name: push image to dockerhub
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: larasai/demo_gradle
         registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
    

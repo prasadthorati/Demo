@@ -1,5 +1,5 @@
 FROM openjdk:8-jre-alpine
 EXPOSE 8080
-COPY ./build/libs/demo-0.0.1-SNAPSHOT-plain.jar /opt
+COPY ./build/libs/demo.jar /opt/demo.jar
 WORKDIR /opt
-ENTRYPOINT ["java" ,"-jar", "demo-0.0.1-SNAPSHOT-plain.jar"]
+CMD ["java" ,"-jar", "demo.jar"]

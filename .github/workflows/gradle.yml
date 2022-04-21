@@ -32,11 +32,19 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: push image to dockerhub
+    #- name: push image to dockerhub
+      #uses: mr-smithers-excellent/docker-build-push@v5
+      #with:
+        #image: larasai/demo_gradle
+        #tags: latest
+        #registry: docker.io
+        #username: ${{ secrets.DOCKER_USERNAME }}
+        #password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: push to ecr
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-        image: larasai/demo_gradle
-        tags: latest
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        image: image-name
+        registry: public.ecr.aws/e8e2a7i6/demo_gradle
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

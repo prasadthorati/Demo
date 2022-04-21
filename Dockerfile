@@ -5,4 +5,4 @@ ENV PROJECT_HOME /opt/app
 COPY /build/libs/demo.jar $PROJECT_HOME/demo.jar
 WORKDIR $PROJECT_HOME
 EXPOSE 8080
-CMD ["npm" ,"start"]
+CMD ["java", "-jar", "demo.jar"]

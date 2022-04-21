@@ -1,5 +1,4 @@
 FROM openjdk:11
-RUN apk update && apk add /bin/sh
 RUN mkdir -p /opt/app
 ENV PROJECT_HOME /opt/app
 COPY /build/libs/demo.jar $PROJECT_HOME/demo.jar

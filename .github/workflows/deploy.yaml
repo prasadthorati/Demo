@@ -1,18 +1,16 @@
-name: Deploy to production
+name: Docker image CI
 
 on:
   push:
     branches: [ master ]
 
-permissions:
-  contents: read
-
 jobs:
-  build:
-    name: Build image
-    runs-on: ubuntu-latest
 
+  build:
+  
+    runs-on: ubuntu-latest
     steps: 
+    
     - name: check out code
       uses: actions/checkout@v3
    

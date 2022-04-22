@@ -29,9 +29,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: grant execute permissions to gradlew
-      run: chmod +x gradlew
+      run: gradle clean
     - name: Build with Gradle
-      run: ./gradlew build
+      run: gradle build
     - name: push image to dockerhub
       uses: mr-smithers-excellent/docker-build-push@v5
       with:

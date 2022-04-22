@@ -1,3 +1,4 @@
+
 name: Docker image CI
 
 on:
@@ -9,9 +10,10 @@ jobs:
   build:
   
     runs-on: ubuntu-latest
+    
     steps: 
     
-    - name: check out code
+    - name: check out code from github
       uses: actions/checkout@v3
    
     - name: Configure AWS credentials

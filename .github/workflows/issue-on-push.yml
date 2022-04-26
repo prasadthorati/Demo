@@ -1,13 +1,13 @@
-on: [push]
-name: Create an issue on push
-permissions:
-  contents: read
-  issues: write 
+on: push
 jobs:
-  stuff:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: JasonEtco/create-an-issue@v2
-        env:
-          TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: Show GitHub Actions logo
+          committer_name: GitHub Actions
+          committer_email: actions@github.com

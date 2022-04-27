@@ -1,6 +1,0 @@
-uses: wescran/commit-issue-action@v1
-with:
-  sourceRepo: 'prasadthorati/demo'
-  targetRepo: 'prasadthorati/demo'
-  issueLabels: 'Type: Maintenance, Status: Available'
-  timeFrame: `86400`

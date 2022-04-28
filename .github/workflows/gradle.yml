@@ -30,10 +30,7 @@ jobs:
         distribution: 'temurin'
     - name: Build with gradle
       run: gradle clean build
-  Deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+  
     - name: push image to dockerhub
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
@@ -42,6 +39,10 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+  Deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
         
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1

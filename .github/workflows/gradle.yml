@@ -31,11 +31,7 @@ jobs:
         server-id: docker.io
     - name: Build with gradle
       run: gradle clean build
-  Deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
+      
     - name: push image to dockerhub
       uses: mr-smithers-excellent/docker-build-push@v5
       with:

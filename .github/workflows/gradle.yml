@@ -28,34 +28,33 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        server-id: docker.io
     - name: Build with gradle
       run: gradle clean build
       
-    - name: push image to dockerhub
-      uses: mr-smithers-excellent/docker-build-push@v5
+    - name: Docker meta
+      id: docker_meta
+      uses: crazy-max/ghaction-docker-meta@v1
       with:
-        image: larasai/demo_gradle
-        tags: latest
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-  
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+        images: ghcr.io/gbaeke/prasad
+        tag-sha: true
+        tag-edge: false
+        tag-latest: true
+          
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
 
-    - name: Build, tag, and push image to Amazon ECR AWS
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: demo_gradle
-        IMAGE_TAG: ${{ github.sha }}
-      run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+        
+    - name: Login to GHCR
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GHCR_PASSWORD }}
+          
+    - name: Build image
+      uses: docker/build-push-action@v2
+      with:
+        tags: ${{ steps.docker_meta.outputs.tags }} 
+        file: ./Dockerfile

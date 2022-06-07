@@ -36,8 +36,7 @@ jobs:
           echo "::set-output name=imagename::${{ env.REGISTRY }}/${GITHUB_REPOSITORY,,}/${{ env.SERVICE_NAME }}:$(git rev-parse --short HEAD)"
           
     - name: Build with gradle
-      uses: gradle/gradle-build-action@v2
-        run:gradle clean build
+      run: gradle clean build
       
     - name: Edastakhat UI Build
       run: |

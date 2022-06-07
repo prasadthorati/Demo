@@ -20,6 +20,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    outputs:
+      o-imagename: ${{ steps.set-image-name.outputs.imagename }}
 
     steps:
     - uses: actions/checkout@v3
@@ -28,39 +30,39 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+        
+    - name: Set Image Name
+      id: set-image-name
+      run: |
+          echo "IMAGE_NAME=${{ env.REGISTRY }}/${GITHUB_REPOSITORY,,}/${{ env.SERVICE_NAME }}:$(git rev-parse --short HEAD)" >>${GITHUB_ENV}
+          echo "::set-output name=imagename::${{ env.REGISTRY }}/${GITHUB_REPOSITORY,,}/${{ env.SERVICE_NAME }}:$(git rev-parse --short HEAD)"
+          
     - name: Build with gradle
       run: gradle clean build
       
-    - name: Docker meta
-      id: docker_meta
-      uses: crazy-max/ghaction-docker-meta@v1
+    - name: Edastakhat UI Build
+      run: |
+           docker build -t ${{ env.IMAGE_NAME }} .
+  artifact-upload:
+    needs: 
+      - build
+    runs-on: ed-kube-worker2
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge 
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write          
+    steps:
+    - name: Log into registry ${{ env.REGISTRY }}
+      uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
       with:
-        images: ghcr.io/gbaeke/prasad
-        tag-sha: true
-        tag-edge: false
-        tag-latest: true
-          
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-        
-    - name: Login to GHCR
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GHCR_PASSWORD }}
-          
-    - name: Build image
-      uses: docker/build-push-action@v2
-      with:
-        tags: ${{ steps.docker_meta.outputs.tags }} 
-        file: ./Dockerfile
-    - name: Push image
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        tags: ${{ steps.docker_meta.outputs.tags }}
-        file: ./Dockerfile
+        registry: ${{ env.REGISTRY }}
+        username: ${{ GHCR_USERNAME }}
+        password: ${{ GHCR_PASSWORD }}
+    
+    - name: Push Docker image
+      run: |
+          docker images
+          docker push ${{needs.build.outputs.o-imagename}}
+          docker images

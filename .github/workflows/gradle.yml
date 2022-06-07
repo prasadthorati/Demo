@@ -9,9 +9,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ 2.1-master ]
 
 permissions:
   contents: read
@@ -38,7 +36,8 @@ jobs:
           echo "::set-output name=imagename::${{ env.REGISTRY }}/${GITHUB_REPOSITORY,,}/${{ env.SERVICE_NAME }}:$(git rev-parse --short HEAD)"
           
     - name: Build with gradle
-      run: gradle clean build
+      uses: gradle/gradle-build-action@v2
+        run:gradle clean build
       
     - name: Edastakhat UI Build
       run: |

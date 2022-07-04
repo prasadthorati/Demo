@@ -38,6 +38,6 @@ jobs:
     - name: Build with gradle
       run: gradle clean build
       
-    - name: Edastakhat UI Build
-      run: |
-           docker build -t ${{ env.IMAGE_NAME }} .
+#    - name: Edastakhat UI Build
+#      run: |
+#           docker build -t ${{ env.IMAGE_NAME }} .

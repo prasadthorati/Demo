@@ -1,7 +1,0 @@
-#!/bin/bash
-password_lines=$(grep -irE 'password: *' | grep -v 'password: :change')
-echo "$password_lines"
-if [[ -n $password_lines ]]; then
-    echo "Password found in an above file"
-    exit 1
-fi

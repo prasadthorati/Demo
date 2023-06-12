@@ -1,5 +1,5 @@
 steps:
-- name: 'gcr.io/cloud-builders/gradle'
+- name: 'gradle:8-jdk8'
   args: ['clean', 'build']
   env:
     - 'GRADLE_OPTS=-Dorg.gradle.daemon=false'

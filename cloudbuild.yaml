@@ -1,10 +1,12 @@
 steps:
-- name: gradle:8.1.1-jdk8
-  entrypoint: gradle
-  args: ['build']
-
-
-
+  - name: 'gradle:7.3.3-jdk8'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        export PATH="$PATH:/opt/gradle-7.3.3/bin"
+        gradle clean build
+        
 #steps:
 #- name: gradle:8-jdk8
 #  entrypoint: gradle

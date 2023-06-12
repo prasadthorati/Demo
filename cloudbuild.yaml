@@ -1,11 +1,11 @@
 steps:
-- name: 'gcr.io/cloud-builders/gradle:7.3.3'
+- name: 'gcr.io/cloud-builders/gradle:8.1.1-jdk8'
   args: ['assemble']
 
-- name: 'gcr.io/cloud-builders/gradle:7.3.3'
+- name: 'gcr.io/cloud-builders/gradle:8.1.1-jdk8'
   args: ['test']
 
-- name: 'gcr.io/cloud-builders/gradle:7.3.3'
+- name: 'gcr.io/cloud-builders/gradle:8.1.1-jdk8'
   args: ['publish']
 
 # Additional steps or actions can be added as needed

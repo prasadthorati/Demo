@@ -3,7 +3,7 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'gradle clean build'
+      - 'gradle clean build --stacktrace --debug'
 
         
 #steps:

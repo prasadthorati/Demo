@@ -1,11 +1,11 @@
 steps:
-- name: 'gcr.io/cloud-builders/gradle:7.0.2'
+- name: 'gcr.io/cloud-builders/gradle:7.3.3'
   args: ['assemble']
 
-- name: 'gcr.io/cloud-builders/gradle:7.0.2'
+- name: 'gcr.io/cloud-builders/gradle:7.3.3'
   args: ['test']
 
-- name: 'gcr.io/cloud-builders/gradle:7.0.2'
+- name: 'gcr.io/cloud-builders/gradle:7.3.3'
   args: ['publish']
 
 # Additional steps or actions can be added as needed

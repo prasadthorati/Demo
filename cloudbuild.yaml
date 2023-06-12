@@ -3,7 +3,7 @@ steps:
   args: ['clean', 'build']
   env:
     - 'GRADLE_OPTS=-Dorg.gradle.daemon=false'
-  dir: 'subdirectory'
+  dir: 'build.gradle'
 
 #steps:
 #- name: gradle:8-jdk8

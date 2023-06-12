@@ -3,9 +3,7 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - |
-        export PATH="$PATH_SUBSTITUTION:/opt/gradle-7.3.3/bin"
-        gradle clean build
+      - 'gradle clean build'
 
         
 #steps:

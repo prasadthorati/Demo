@@ -1,5 +1,5 @@
 steps:
-- name: gradle:7.3.3-jdk8
+- name: gradle:8.1.1-jdk17
   entrypoint: gradle
   args: ['assemble']
 

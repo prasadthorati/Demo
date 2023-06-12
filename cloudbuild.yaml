@@ -1,4 +1,11 @@
 steps:
-- name: gradle:8-jdk8
-  entrypoint: gradle
-  args: ['test']
+- name: 'gcr.io/cloud-builders/gradle'
+  args: ['clean', 'build']
+  env:
+    - 'GRADLE_OPTS=-Dorg.gradle.daemon=false'
+  dir: 'subdirectory'
+
+#steps:
+#- name: gradle:8-jdk8
+#  entrypoint: gradle
+#  args: ['test']
